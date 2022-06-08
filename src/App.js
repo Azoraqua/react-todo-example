@@ -15,7 +15,7 @@ function App() {
 
   return (
     <Container sx={{ display: "flex", flexDirection: "column", gap: "2em", mt: "2em" }}>
-      <TodoForm onSubmit={(name) => addTodo(name)} />
+      <TodoForm todos={todos} onSubmit={(name) => addTodo(name)} />
       <TodoList todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo} />
     </Container>
   );

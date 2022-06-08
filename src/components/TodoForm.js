@@ -7,14 +7,16 @@ import {
   Button,
 } from "@mui/material";
 
-function TodoForm({ onSubmit }) {
+function TodoForm({ todos, onSubmit }) {
   const [name, setName] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-
     setName("");
-    onSubmit(name);
+
+    if (!todos.some(todo => todo.name === name)) {
+        onSubmit(name);
+    }
   }
 
   return (
