@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Container } from "@mui/material";
+import { TodoForm, TodoList } from "./components";
+
+import "./App.css";
 
 function App() {
+  const [
+    todos,
+    setTodos,
+    addTodo = (name) => setTodos(prev => [...prev, { name, done: false }]),
+    removeTodo = (name) => setTodos(prev => prev.filter(todo => todo.name !== name)),
+    toggleTodo = (name) => setTodos((prev) => prev.map((todo) => todo.name === name ? { name, done: !todo.done } : todo))
+  ] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container sx={{ display: "flex", flexDirection: "column", gap: "2em", mt: "2em" }}>
+      <TodoForm onSubmit={(name) => addTodo(name)} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo} />
+    </Container>
   );
 }
 
